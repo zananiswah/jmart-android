@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -21,7 +22,7 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     private static final Gson gson = new Gson();
-    private static Account loggedAccount = null;
+    private static Account loggedAccount;
 
     public static Account getLoggedAccount(){
         return loggedAccount;
@@ -32,9 +33,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        TextView textregister = findViewById(R.id.textView);
+        textregister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
         EditText textemail = findViewById(R.id.login_email);
         EditText textpassword = findViewById(R.id.login_password);
-        Button buttonlogin = findViewById(R.id.button);
+        Button buttonlogin = findViewById(R.id.button2);
         buttonlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject object = new JSONObject(response);
                             if(object != null){
-                                Toast.makeText(LoginActivity.this, "Login Success!", Toast.LENGTH_SHORT);
+                                Toast.makeText(LoginActivity.this, "Login Success!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 loggedAccount = gson.fromJson(object.toString(), Account.class);
                                 startActivity(intent);
@@ -52,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         catch (JSONException e){
                             e.printStackTrace();
-                            Toast.makeText(LoginActivity.this, "Login Error!", Toast.LENGTH_SHORT);
+                            Toast.makeText(LoginActivity.this, "Login Error!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 };
