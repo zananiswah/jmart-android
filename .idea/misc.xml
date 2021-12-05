@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.2703125" />
         <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/layout/activity_login.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/layout/fragment_about_me_activity.xml" value="0.23097826086956522" />
+        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/layout/fragment_filter.xml" value="0.264" />
+        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/layout/fragment_product.xml" value="0.23097826086956522" />
+        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/layout/fragment_products.xml" value="0.23097826086956522" />
+        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/layout/tab_layout.xml" value="0.23097826086956522" />
+        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/menu/menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/zanan/AndroidStudioProjects/jmartandroid/app/src/main/res/menu/menu_bar.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
