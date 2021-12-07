@@ -9,13 +9,13 @@ public class AboutMeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about_me_activity);
-        TextView name = (TextView) findViewById(R.id.nameOutputAccount);
+        TextView name = (TextView) findViewById(R.id.text_name);
         name.setText("" + LoginActivity.getLoggedAccount().name);
 
-        TextView email = (TextView) findViewById(R.id.emailOutputAccount);
+        TextView email = (TextView) findViewById(R.id.text_email);
         email.setText("" + LoginActivity.getLoggedAccount().email);
 
-        TextView balance = (TextView) findViewById(R.id.balanceOutputAccount);
+        TextView balance = (TextView) findViewById(R.id.text_balance);
         balance.setText("" + LoginActivity.getLoggedAccount().balance);
     }
 
