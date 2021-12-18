@@ -20,9 +20,14 @@ import com.zanaJmartAK.jmart_android.request.LoginRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * This is handle the activity when user do log in
+ * @author Zana Niswah Awahita
+ */
+
 public class LoginActivity extends AppCompatActivity {
     private static final Gson gson = new Gson();
-    private static Account loggedAccount;
+    public static Account loggedAccount;
 
     public static Account getLoggedAccount(){
         return loggedAccount;

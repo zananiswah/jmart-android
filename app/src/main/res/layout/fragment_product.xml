@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_product">
+    tools:context=".fragment_product"
+    android:background="#BCFFEB3B">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,46 +18,52 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/ButtonPrev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:layout_weight="1"
-                android:text="prev" />
+                android:text="prev"
+                android:backgroundTint="#B62020"/>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/ButtonNext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:layout_weight="1"
-                android:text="Next" />
+                android:text="Next"
+                android:backgroundTint="#B62020"/>
 
             <EditText
-                android:id="@+id/editTextNumber"
+                android:id="@+id/InputPageProduct"
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="number"
                 android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+               />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/ButtonGo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
                 android:layout_weight="1"
-                android:text="go" />
+                android:text="go"
+                android:backgroundTint="#B62020"/>
 
         </LinearLayout>
 
         <ListView
-            android:id="@+id/list_product"
+            android:id="@+id/ProductListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_height="689dp"
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
+
 </FrameLayout>

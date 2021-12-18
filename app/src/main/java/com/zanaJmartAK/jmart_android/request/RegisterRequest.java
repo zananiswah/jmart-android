@@ -6,6 +6,12 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Handle request when we want to register new account(s)
+ * @author Zana Niswah Awahita
+ */
+
 public class RegisterRequest extends StringRequest {
     private static final String URL =  "http://10.0.2.2:7593/account/register";
     private final Map<String , String> params;

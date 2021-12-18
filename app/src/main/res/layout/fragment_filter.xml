@@ -4,7 +4,8 @@
     android:id="@+id/nameFilter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_filter">
+    tools:context=".fragment_filter"
+    android:background="#BCFFEB3B">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -123,13 +124,12 @@
                 android:textSize="20sp" />
 
             <Spinner
-                android:id="@+id/categotyDrawFilter"
+                android:id="@+id/categoryDrawFilter"
                 android:layout_width="161dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:drawable/btn_dropdown"
-
-
+                android:entries="@array/productCategory"
                 android:minHeight="48dp"
                 android:spinnerMode="dropdown"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
@@ -147,7 +147,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:text="Apply" />
+                android:text="Apply"
+                android:backgroundTint="#B62020"/>
 
             <Button
                 android:id="@+id/clearFilter"
@@ -155,7 +156,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_weight="1"
-                android:text="Clear" />
+                android:text="Clear"
+                android:backgroundTint="#B62020"/>
         </LinearLayout>
 
     </LinearLayout>

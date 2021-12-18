@@ -1,5 +1,6 @@
 package com.zanaJmartAK.jmart_android;
 
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,58 +8,84 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link fragment_filter#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.zanaJmartAK.jmart_android.model.Product;
+import com.zanaJmartAK.jmart_android.request.RequestFactory;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+
 public class fragment_filter extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public fragment_filter() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Filter.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static fragment_filter newInstance(String param1, String param2) {
-        fragment_filter fragment = new fragment_filter();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private static final Gson gson = new Gson();
+    public static int status = 0;
+    public static ArrayList<Product> listFiltered = new ArrayList<Product>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_filter, container, false);
+        View inf = inflater.inflate(R.layout.fragment_filter, container, false);
+        EditText name = (EditText) inf.findViewById(R.id.nameInputFilter);
+        EditText lowest = (EditText) inf.findViewById(R.id.lowestInputFilter);
+        EditText highest = (EditText) inf.findViewById(R.id.highestInputFilter);
+        CheckBox newCheck = (CheckBox) inf.findViewById(R.id.newFilter);
+        CheckBox usedCheck = (CheckBox) inf.findViewById(R.id.usedFilter);
+        Spinner category = (Spinner) inf.findViewById(R.id.categoryDrawFilter);
+        Button apply = (Button) inf.findViewById(R.id.applyFilter);
+        Button clear = (Button) inf.findViewById(R.id.clearFilter);
+
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_SHORT).show();
+                Response.Listener<String> listenerFiltered = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray object = new JSONArray(response);
+                            if(object != null){
+                                listFiltered = gson.fromJson(object.toString(),new TypeToken<ArrayList<Product>>(){}.getType());
+                                System.out.println(listFiltered);
+                                Toast.makeText(getActivity(),"Filtered",Toast.LENGTH_SHORT).show();
+                                status = 1;
+                            }else{
+                                Toast.makeText(getActivity(),"No Data",Toast.LENGTH_SHORT).show();
+                            }
+                            getActivity().finish();
+                            getActivity().overridePendingTransition(0,0);
+                            getActivity().startActivity(getActivity().getIntent());
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+                requestQueue.add(RequestFactory.getProduct(fragment_product.page,fragment_product.pageSize,LoginActivity.getLoggedAccount().id,name.getText().toString(),lowest.getText().toString(),highest.getText().toString(),category.getSelectedItem().toString(),String.valueOf(usedCheck.isChecked()),listenerFiltered,null));
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                status = 0;
+                getActivity().finish();
+                getActivity().overridePendingTransition(0,0);
+                getActivity().startActivity(getActivity().getIntent());
+            }
+        });
+
+        return inf;
     }
 }

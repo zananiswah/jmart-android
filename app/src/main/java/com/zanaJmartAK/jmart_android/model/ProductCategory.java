@@ -1,5 +1,10 @@
 package com.zanaJmartAK.jmart_android.model;
 
+/**
+ * model as a Product Category similar to backend
+ * @author Zana Niswah Awahita
+ */
+
 public enum ProductCategory {
     BOOK,
     KITCHEN,

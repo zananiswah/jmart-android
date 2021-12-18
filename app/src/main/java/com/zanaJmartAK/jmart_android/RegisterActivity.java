@@ -9,15 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.zanaJmartAK.jmart_android.model.Account;
+import com.zanaJmartAK.jmart_android.request.RegisterRequest;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.zanaJmartAK.jmart_android.model.Account;
-import com.zanaJmartAK.jmart_android.request.RegisterRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+/**
+ * This is handle the activity when user do register new account
+ * @author Zana Niswah Awahita
+ */
 
 public class RegisterActivity extends AppCompatActivity {
 

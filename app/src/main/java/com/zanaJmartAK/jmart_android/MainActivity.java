@@ -10,9 +10,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
+
+/**
+ * This is used to handle the 3 main activity shows in the menu bar, that is search, create new product, and about me
+ * @author Zana Niswah Awahita
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         if (item.getItemId() == R.id.AboutMe) {
-            Toast.makeText(this, "About Me Selected", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "About Me Selected", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, AboutMeActivity.class);
             startActivity(intent);
         }
