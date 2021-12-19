@@ -15,18 +15,16 @@ public class Payment extends Invoice{
     public int productCount;
     public ArrayList<Record> history = new ArrayList<Record>();
 
-    public  static class Record {
+    public static class Record{
         public final Date date;
-        public String massage;
+        public String message;
         public Status status;
 
-
-        public Record( Status status, String massage) {
+        public Record(Status status, String message){
             this.date = java.util.Calendar.getInstance().getTime();
-            this.status = status;
-            this.massage = massage;
+            this.status = Status.WAITING_CONFIRMATION;
+            this.message = message;
         }
-
     }
 
     @Override

@@ -10,8 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView7"
@@ -19,19 +18,17 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="20dp"
             android:layout_height="wrap_content"
-            android:text="Personal Purchase History"
+            android:text="Purchase History"
             android:textAlignment="center"
             android:textSize="24sp"
-            android:background="#B62020"
-           />
+            android:background="#B62020"/>
 
         <ListView
             android:id="@+id/storeHistory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp"
-            />
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

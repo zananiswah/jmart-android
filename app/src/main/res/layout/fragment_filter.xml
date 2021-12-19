@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nameFilter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment_filter"
@@ -9,7 +8,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="15dp"
         android:orientation="vertical">
 
         <TextView
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/nameInputFilter"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Lowest Price"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/highestFilter"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Highest Price"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +84,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -93,17 +93,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Product Condition"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <CheckBox
-                android:id="@+id/newFilter"
+                android:id="@+id/newCheckFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="New" />
 
             <CheckBox
-                android:id="@+id/usedFilter"
+                android:id="@+id/usedCheckFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -112,7 +112,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="79dp"
             android:orientation="horizontal">
 
             <TextView
@@ -121,14 +121,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Product Category"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <Spinner
-                android:id="@+id/categoryDrawFilter"
+                android:id="@+id/SpinnerCategory"
                 android:layout_width="161dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@android:drawable/btn_dropdown"
+
                 android:entries="@array/productCategory"
                 android:minHeight="48dp"
                 android:spinnerMode="dropdown"
@@ -138,27 +138,33 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="68dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/applyFilter"
+                android:id="@+id/applyButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:text="Apply"
                 android:backgroundTint="#B62020"/>
 
             <Button
-                android:id="@+id/clearFilter"
+                android:id="@+id/clearButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
+
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:text="Clear"
                 android:backgroundTint="#B62020"/>
         </LinearLayout>
+
+        <ListView
+            android:id="@+id/filteredView"
+            android:layout_width="fill_parent"
+            android:layout_height="265dp" />
 
     </LinearLayout>
 

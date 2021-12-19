@@ -16,7 +16,7 @@ import java.util.Map;
  */
 
 public class PaymentRequest extends StringRequest {
-    public static final String URL = "http://10.0.2.2:8080/payment/create";
+    public static final String URL = "http://10.0.2.2:7593/payment/create";
     public final Map<String,String> params;
 
     public PaymentRequest(String productCount, String shipmentAddress, Response.Listener<String> listener, @Nullable Response.ErrorListener errorListener) {

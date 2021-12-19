@@ -13,14 +13,18 @@
         android:id="@+id/CreateProduct"
         android:icon="@drawable/ic_baseline_add_box_24"
         android:title="Create Product"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="collapseActionView|always"/>
+
+    <item
+        android:id="@+id/PersonalHistory"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="About Me"
         app:showAsAction="collapseActionView|always"/>
 
     <item
         android:id="@+id/AboutMe"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="About Me"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="collapseActionView|always"/>
 
 </menu>

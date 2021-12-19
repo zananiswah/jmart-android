@@ -1,6 +1,7 @@
 package com.zanaJmartAK.jmart_android;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,9 +9,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,62 +35,117 @@ import java.util.ArrayList;
 public class fragment_filter extends Fragment {
 
     private static final Gson gson = new Gson();
-    public static int status = 0;
-    public static ArrayList<Product> listFiltered = new ArrayList<Product>();
+    public static ArrayList<Product> productsList = new ArrayList<>();
+    final int pageSize = 100;
+    static int page = 0;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View inf = inflater.inflate(R.layout.fragment_filter, container, false);
-        EditText name = (EditText) inf.findViewById(R.id.nameInputFilter);
-        EditText lowest = (EditText) inf.findViewById(R.id.lowestInputFilter);
-        EditText highest = (EditText) inf.findViewById(R.id.highestInputFilter);
-        CheckBox newCheck = (CheckBox) inf.findViewById(R.id.newFilter);
-        CheckBox usedCheck = (CheckBox) inf.findViewById(R.id.usedFilter);
-        Spinner category = (Spinner) inf.findViewById(R.id.categoryDrawFilter);
-        Button apply = (Button) inf.findViewById(R.id.applyFilter);
-        Button clear = (Button) inf.findViewById(R.id.clearFilter);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View productView = inflater.inflate(R.layout.fragment_filter, container, false);
+        EditText name = productView.findViewById(R.id.nameInputFilter);
+        EditText lowestPrice = productView.findViewById(R.id.lowestInputFilter);
+        EditText highestPrice = productView.findViewById(R.id.highestInputFilter);
+        CheckBox newCheck = productView.findViewById(R.id.newCheckFilter);
+        CheckBox usedCheck = productView.findViewById(R.id.usedCheckFilter);
+        Spinner category = productView.findViewById(R.id.SpinnerCategory);
+        Button apply = productView.findViewById(R.id.applyButton);
+        Button clear = productView.findViewById(R.id.clearButton);
+        ListView lv = (ListView) productView.findViewById(R.id.filteredView);
 
+        newCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    usedCheck.setChecked(false);
+                }
+            }
+        });
+        usedCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b){
+                    newCheck.setChecked(false);
+                }
+            }
+        });
+
+        //mengosongkan parameter yang digunakan untuk menfilter
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name.setText("");
+                lowestPrice.setText("");
+                highestPrice.setText("");
+                newCheck.setChecked(false);
+                usedCheck.setChecked(false);
+                lv.setVisibility(View.GONE);
+            }
+        });
+
+        Response.Listener<String> listener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray object = new JSONArray(response);
+                    if (object != null) {
+                        productsList = gson.fromJson(object.toString(), new TypeToken<ArrayList<Product>>() {
+                        }.getType());
+                        System.out.println(productsList);
+                        ArrayAdapter<Product> listViewAdapter = new ArrayAdapter<Product>(
+                                getActivity(),
+                                android.R.layout.simple_list_item_1,
+                                productsList
+                        );
+                        lv.setVisibility(View.GONE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
+        requestQueue.add(RequestFactory.getPage("product", page, pageSize, listener, null));
+
+        //menampilkan product yang berhasil melalui filter
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Clicked",Toast.LENGTH_SHORT).show();
-                Response.Listener<String> listenerFiltered = new Response.Listener<String>() {
+                Response.Listener<String> listener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONArray object = new JSONArray(response);
-                            if(object != null){
-                                listFiltered = gson.fromJson(object.toString(),new TypeToken<ArrayList<Product>>(){}.getType());
-                                System.out.println(listFiltered);
-                                Toast.makeText(getActivity(),"Filtered",Toast.LENGTH_SHORT).show();
-                                status = 1;
-                            }else{
-                                Toast.makeText(getActivity(),"No Data",Toast.LENGTH_SHORT).show();
+                            if (object != null) {
+                                productsList = gson.fromJson(object.toString(), new TypeToken<ArrayList<Product>>() {
+                                }.getType());
+                                System.out.println(productsList);
+                                ArrayAdapter<Product> listViewAdapter = new ArrayAdapter<Product>(
+                                        getActivity(),
+                                        android.R.layout.simple_list_item_1,
+                                        productsList
+                                );
+                                lv.setVisibility(View.VISIBLE);
+                                lv.setAdapter(listViewAdapter);
+
+                                lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                        fragment_product.productClicked = (Product) lv.getItemAtPosition(i);
+                                        Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
                             }
-                            getActivity().finish();
-                            getActivity().overridePendingTransition(0,0);
-                            getActivity().startActivity(getActivity().getIntent());
-                        }catch (JSONException e){
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 };
                 RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-                requestQueue.add(RequestFactory.getProduct(fragment_product.page,fragment_product.pageSize,LoginActivity.getLoggedAccount().id,name.getText().toString(),lowest.getText().toString(),highest.getText().toString(),category.getSelectedItem().toString(),String.valueOf(usedCheck.isChecked()),listenerFiltered,null));
+                requestQueue.add(RequestFactory.getProduct(page, pageSize, name.getText().toString(), lowestPrice.getText().toString(), highestPrice.getText().toString(), category.getSelectedItem().toString(), String.valueOf(!newCheck.isChecked()), listener, null));
             }
         });
-
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                status = 0;
-                getActivity().finish();
-                getActivity().overridePendingTransition(0,0);
-                getActivity().startActivity(getActivity().getIntent());
-            }
-        });
-
-        return inf;
+        return productView;
     }
 }

@@ -64,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AboutMeActivity.class);
             startActivity(intent);
         }
+        if (item.getItemId() == R.id.PersonalHistory) {
+            Toast.makeText(this, "Personal History Selected", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, InvoiceActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 }
